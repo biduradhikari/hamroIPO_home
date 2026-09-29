@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HamroIPO – Unified IPO Manager for Your Family</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --blue: #0057ff;
+        --sky: #00c6ff;
+        --navy: #001f6b;
+        --green: #00d68f;
+        --light: #f4f7ff;
+        --dark: #0a0f1e;
+        --muted: #6b7a99;
+        --card: #ffffff;
+        --border: #e2e8f4;
+        --radius: 18px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--light);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-brand {
+        font-family: "Sora", sans-serif;
+        font-weight: 800;
+        font-size: 1.3rem;
+        background: linear-gradient(135deg, var(--blue), var(--sky));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+      .nav-cta {
+        background: var(--blue);
+        color: #fff !important;
+        padding: 8px 20px;
+        border-radius: 50px;
+      }
+      .nav-cta:hover {
+        background: var(--navy);
+        color: #fff !important;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        background: linear-gradient(
+          155deg,
+          #001f6b 0%,
+          #0057ff 45%,
+          #00c6ff 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 120px 24px 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E")
+          repeat;
+      }
+      .hero-badge {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 50px;
+        padding: 6px 18px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        display: inline-block;
+      }
+      .hero h1 {
+        font-family: "Sora", sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .hero h1 span {
+        color: #00c6ff;
+      }
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 560px;
+        margin: 0 auto 36px;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        background: #fff;
+        color: var(--blue);
+        border-radius: 50px;
+        padding: 14px 32px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      }
+      .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      }
+      .btn-ghost {
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        border-radius: 50px;
+        padding: 14px 32px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 48px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 60px;
+      }
+      .stat {
+        color: #fff;
+        text-align: center;
+      }
+      .stat-num {
+        font-family: "Sora", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        display: block;
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 4px;
+      }
+
+      /* ── SECTION SHARED ── */
+      section {
+        padding: 90px 0;
+      }
+      .section-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-family: "Sora", sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        color: var(--dark);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+      .section-sub {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      /* ── SCREENSHOTS ── */
+      .screenshots {
+        background: var(--light);
+      }
+      .phone-wrap {
+        position: relative;
+        display: block;
+        filter: drop-shadow(0 20px 40px rgba(0, 80, 255, 0.18));
+        transition: transform 0.35s ease;
+        text-align: center;
+      }
+
+      .phone-wrap:hover {
+        transform: translateY(-8px) rotate(-1deg);
+      }
+
+      .phone-wrap img {
+        height: 360px;
+        max-width: 100%;
+        width: auto;
+        object-fit: cover;
+      }
+
+      .phone-label {
+        text-align: center;
+        margin-top: 14px;
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      /* ── FEATURES ── */
+      .features {
+        background: #fff;
+      }
+      .feat-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 36px 28px;
+        background: var(--card);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        height: 100%;
+      }
+      .feat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 48px rgba(0, 87, 255, 0.1);
+      }
+      .feat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--blue), var(--sky));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+      .feat-card h5 {
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+      .feat-card p {
+        color: var(--muted);
+        font-size: 0.93rem;
+        line-height: 1.65;
+      }
+
+      /* ── HOW IT WORKS ── */
+      .how {
+        background: var(--light);
+      }
+      .step {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        padding: 28px;
+        border-radius: var(--radius);
+        background: #fff;
+        border: 1px solid var(--border);
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s;
+      }
+      .step:hover {
+        box-shadow: 0 8px 32px rgba(0, 87, 255, 0.08);
+      }
+      .step-num {
+        min-width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue), var(--sky));
+        color: #fff;
+        font-family: "Sora", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .step h5 {
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .step p {
+        color: var(--muted);
+        font-size: 0.93rem;
+        margin: 0;
+      }
+
+      /* ── WHY HAMROIPO ── */
+      .why {
+        background: #fff;
+      }
+      .why-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .why-check {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(0, 214, 143, 0.12);
+        color: var(--green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .why-item h6 {
+        font-weight: 700;
+        font-family: "Sora", sans-serif;
+        margin-bottom: 4px;
+      }
+      .why-item p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      .why-visual {
+        background: linear-gradient(145deg, #001f6b, #0057ff);
+        border-radius: 24px;
+        padding: 48px 36px;
+        color: #fff;
+        text-align: center;
+      }
+      .why-visual .big-num {
+        font-family: "Sora", sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1;
+        color: #00c6ff;
+      }
+      .why-visual p {
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 8px;
+        font-size: 0.95rem;
+      }
+      .why-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        margin: 24px 0;
+      }
+
+      /* ── FAQ ── */
+      .faq {
+        background: var(--light);
+      }
+      .accordion-button {
+        font-family: "Sora", sans-serif;
+        font-weight: 600;
+        font-size: 0.97rem;
+        background: #fff;
+        color: var(--dark);
+      }
+      .accordion-button:not(.collapsed) {
+        color: var(--blue);
+        background: #f0f5ff;
+        box-shadow: none;
+      }
+      .accordion-button:focus {
+        box-shadow: none;
+      }
+      .accordion-item {
+        border: 1px solid var(--border);
+        border-radius: 12px !important;
+        margin-bottom: 12px;
+        overflow: hidden;
+      }
+      .accordion-body {
+        font-size: 0.93rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* ── DOWNLOAD ── */
+      .download {
+        background: linear-gradient(
+          135deg,
+          #001f6b 0%,
+          #0057ff 60%,
+          #00c6ff 100%
+        );
+        color: #fff;
+        text-align: center;
+        padding: 100px 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .download h2 {
+        font-family: "Sora", sans-serif;
+        font-weight: 800;
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 16px;
+      }
+      .download p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.05rem;
+        margin-bottom: 36px;
+      }
+      .apk-btn {
+        background: #fff;
+        color: var(--blue);
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+      }
+      .apk-btn:hover {
+        transform: translateY(-3px);
+        color: var(--navy);
+      }
+      .apk-info {
+        margin-top: 18px;
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--dark);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 28px 24px;
+        font-size: 0.85rem;
+      }
+      footer a {
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+
+      /* ── UTILITY ── */
+      .text-blue {
+        color: var(--blue);
+      }
+      .bg-gradient-pill {
+        background: linear-gradient(135deg, var(--blue), var(--sky));
+        color: #fff;
+        border-radius: 50px;
+        padding: 5px 16px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 12px 20px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-stats {
+          gap: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="nav-brand">HamroIPO</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#download" class="nav-cta">Download</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div style="position: relative; z-index: 1">
+        <div class="hero-badge">Hamro IPO</div>
+        <h1>
+          Manage IPOs for your<br /><span>entire family</span> — in one app.
+        </h1>
+        <p>
+          HamroIPO lets you track, apply, and monitor share results for every
+          family member from a single, beautifully simple dashboard.
+        </p>
+        <div class="hero-btns">
+          <a href="#download" class="btn-white"
+            ><i class="bi bi-android2"></i> &nbsp;Download APK</a
+          >
+          <a href="#features" class="btn-ghost">See Features →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">∞</span>
+            <div class="stat-label">Family Members</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">1-tap (almost)</span>
+            <div class="stat-label">Share Application</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">100%</span>
+            <div class="stat-label">Free to Use</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section class="screenshots" id="screenshots">
+      <div class="container text-center">
+        <div class="section-tag">App Preview</div>
+        <h2 class="section-title">Clean. Focused. Powerful.</h2>
+        <p class="section-sub mb-5">
+          Designed to make Nepal's IPO process effortless for everyone in your
+          family.
+        </p>
+        <div class="row justify-content-center g-4">
+          <div class="col-6 col-md-3">
+            <div class="phone-wrap">
+              <img src="s1.png" alt="Splash Screen" />
+            </div>
+            <p class="phone-label">Splash Screen</p>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="phone-wrap">
+              <img src="s2.jpg" alt="Dashboard" />
+            </div>
+            <p class="phone-label">Unified Dashboard</p>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="phone-wrap">
+              <img src="s3.jpg" alt="Reports" />
+            </div>
+            <p class="phone-label">Reports & Results</p>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="phone-wrap">
+              <img src="widget.jpg" alt="Widget" />
+            </div>
+            <p class="phone-label">Widget</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-tag">Features</div>
+          <h2 class="section-title">
+            Everything you need to manage your family's IPO investments
+          </h2>
+          <p class="section-sub">
+            Built specifically for Nepali investors navigating the meroshare IPO
+            ecosystem.
+          </p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon"><i class="bi bi-people-fill"></i></div>
+              <h5>Family Dashboard</h5>
+              <p>
+                Add all family members and view their IPO portfolio, allotment
+                status, and application history in a single unified view.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon">
+                <i class="bi bi-lightning-charge-fill"></i>
+              </div>
+              <h5>One-Tap Apply</h5>
+              <p>
+                Apply for IPOs with a single tap. No more memorizing BOID
+                numbers or manually entering details for each family member.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon"><i class="bi bi-bar-chart-fill"></i></div>
+              <h5>Result Tracking</h5>
+              <p>
+                Instantly check allotment results for all family members. Get a
+                clear view of who got shares and who didn't.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon"><i class="bi bi-bell-fill"></i></div>
+              <h5>IPO Alerts</h5>
+              <p>
+                Stay on top of upcoming IPOs, closing dates, and result
+                announcements so you never miss an opportunity.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon">
+                <i class="bi bi-shield-lock-fill"></i>
+              </div>
+              <h5>Secure & Private</h5>
+              <p>
+                Your data is only transmitted to official CDSC/NEPSE backends.
+                No third-party servers. Your credentials stay yours and within
+                this app's local storage within your device.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feat-card">
+              <div class="feat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+              <h5>Portfolio Summary</h5>
+              <p>
+                View a consolidated summary of all shares held across family
+                members — total units, invested value, and current performance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <div class="section-tag">How It Works</div>
+            <h2 class="section-title">Set up in minutes. Use forever.</h2>
+            <p class="section-sub">
+              Getting started with HamroIPO is straightforward — even for
+              first-time investors.
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <h5>Download & Install the APK</h5>
+                <p>
+                  Download the APK from our website and install it on your
+                  Android device.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <h5>Add Your Family Members</h5>
+                <p>
+                  Enter each family member's MeroShare credentials once.
+                  HamroIPO securely stores them on your device only.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <h5>Browse Open IPOs</h5>
+                <p>
+                  See all currently open IPOs in one place with details like
+                  share type, price, and open/close dates.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>
+                <h5>Apply for Everyone at Once</h5>
+                <p>
+                  Select an IPO and apply on behalf of all your family members
+                  in one go — no switching between accounts.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">5</div>
+              <div>
+                <h5>Check Aggregated Results</h5>
+                <p>
+                  When allotment results are out, view all results together.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY HAMROIPO -->
+    <section class="why">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="section-tag">Why HamroIPO?</div>
+            <h2 class="section-title">
+              Because managing family IPO investments shouldn't be complicated.
+            </h2>
+            <div class="mt-4">
+              <div class="why-item">
+                <div class="why-check"><i class="bi bi-check-lg"></i></div>
+                <div>
+                  <h6>Designed around MeroShare</h6>
+                  <p>
+                    HamroIPO works directly with CDSC's MeroShare platform — the
+                    same system used for all Nepal IPO applications.
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <div class="why-check"><i class="bi bi-check-lg"></i></div>
+                <div>
+                  <h6>No subscriptions, no hidden fees</h6>
+                  <p>
+                    HamroIPO is completely free. Download it, use it, share it
+                    with your family — no strings attached.
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <div class="why-check"><i class="bi bi-check-lg"></i></div>
+                <div>
+                  <h6>Works offline for stored data</h6>
+                  <p>
+                    Already saved family data is available offline. Internet is
+                    only needed when fetching live IPO info or applying.
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <div class="why-check"><i class="bi bi-check-lg"></i></div>
+                <div>
+                  <h6>Regularly updated</h6>
+                  <p>
+                    The app is actively maintained with bug fixes and new
+                    features.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="why-visual">
+              <div class="big-num">A lot</div>
+              <p>faster than managing multiple MeroShare logins manually</p>
+              <div class="why-divider"></div>
+              <div class="big-num" style="color: #00d68f">0</div>
+              <p>free to use</p>
+              <div class="why-divider"></div>
+              <div class="big-num">Family</div>
+              <p>first design — manage everyone you care about, together</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq1"
+                  >
+                    Is HamroIPO safe to use?
+                  </button>
+                </h2>
+                <div
+                  id="faq1"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Yes. HamroIPO does not store your credentials on any
+                    external server. All login data is saved locally on your
+                    device and only communicated directly to the official
+                    MeroShare (CDSC) servers. The app does not collect personal
+                    data.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq2"
+                  >
+                    Does this work on iOS (iPhone)?
+                  </button>
+                </h2>
+                <div
+                  id="faq2"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Currently, HamroIPO is available as an Android APK only. An
+                    iOS version is not available at this time. You can install
+                    the APK directly.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq3"
+                  >
+                    How many family members can I add?
+                  </button>
+                </h2>
+                <div
+                  id="faq3"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    There is no hard limit on the number of family members you
+                    can add. Add as many accounts as you need — parents,
+                    siblings, spouse, children — all visible from one dashboard.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq4"
+                  >
+                    Do I need a DEMAT / BOID number to use the app?
+                  </button>
+                </h2>
+                <div
+                  id="faq4"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Yes — each family member needs an active MeroShare account
+                    linked to a DEMAT/BOID number to apply for IPOs. HamroIPO
+                    uses these existing accounts; it does not create new ones.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq5"
+                  >
+                    Is the app free? Any in-app purchases?
+                  </button>
+                </h2>
+                <div
+                  id="faq5"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    HamroIPO is completely free. There are no in-app purchases,
+                    subscriptions, or premium tiers. All features are available
+                    to every user at no cost.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq6"
+                  >
+                    How do I install an APK on my Android phone?
+                  </button>
+                </h2>
+                <div
+                  id="faq6"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Download the APK file, then go to
+                    <strong>Settings → Security → Install Unknown Apps</strong>
+                    and allow your browser or file manager. Open the downloaded
+                    APK file and tap <strong>Install</strong>. If prompted,
+                    enable "Allow from this source" and proceed.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="download" id="download">
+      <div style="position: relative; z-index: 1">
+        <div
+          class="bg-gradient-pill"
+          style="
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+          "
+        >
+          Android APK — Free Download
+        </div>
+        <h2>Ready to simplify your<br />family's IPO journey?</h2>
+        <p>Download HamroIPO now and set up in minutes. No account required.</p>
+        <a
+          href="https://drive.google.com/file/d/1hfvuhw4J-rbrcNRXlalxa2ThcS_AjVyp/view?usp=sharing"
+          class="apk-btn"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="bi bi-download" style="font-size: 1.2rem"></i>
+          Download APK
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        © 2025
+        <a href="https://drbiduradhikari.com.np" target="_blank"
+          >drbiduradhikari.com.np</a
+        >
+        (HamroIPO is not affiliated with NEPSE or CDSC.)
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Subtle scroll fade-in for sections
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.opacity = "1";
+              e.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".feat-card, .step, .why-item, .phone-wrap")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(24px)";
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>
